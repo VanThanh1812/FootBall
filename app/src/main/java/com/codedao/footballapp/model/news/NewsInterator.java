@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.codedao.footballapp.model.news.entity.News;
-import com.prof.rssparser.Article;
-import com.prof.rssparser.Parser;
+import com.codedao.footballapp.rssparser.Article;
+import com.codedao.footballapp.rssparser.Parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,6 @@ public class NewsInterator {
     }
 
     public void load(String url, final int type) {
-        Log.d("startL", "errr");
         /*URL url2 = null;
         try {
             url2 = new URL("http://feeds.feedburner.com/ndtv/TqgX");
@@ -56,8 +55,10 @@ public class NewsInterator {
                             .setmPubdate(list.get(i).getPubDate().toString())
                             .build();
                     listNews.add(n);
+
+                    Log.d("response", list.get(i).toString());
                 }
-                Log.d("startL", listNews.size()+"");
+
 
                 lisner.onLoadNewsSuccess(listNews);
             }
