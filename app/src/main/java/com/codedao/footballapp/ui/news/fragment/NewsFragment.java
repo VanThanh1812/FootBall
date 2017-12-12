@@ -7,20 +7,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codedao.footballapp.R;
-import com.github.florent37.materialviewpager.MaterialViewPager;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
-/**
- * Created by vanthanh on 12/11/17.
- */
 
 public class NewsFragment extends Fragment{
 
     private Context context;
+    private ViewPager mViewPager;
+    private SmartTabLayout viewPagerTab;
 
     public NewsFragment(){
 
@@ -41,7 +42,7 @@ public class NewsFragment extends Fragment{
         this.context = getContext();
     }
 
-    private MaterialViewPager mViewPager;
+
 
     @Nullable
     @Override
@@ -56,12 +57,17 @@ public class NewsFragment extends Fragment{
     }
 
     private void show() {
-        PagerAdapter adapter = new PageAdapter(getFragmentManager());
-        mViewPager.getViewPager().setAdapter(adapter);
+        PageAdapter adapter = new PageAdapter(getFragmentManager());
+        mViewPager.setAdapter(adapter);
+
+        viewPagerTab.setViewPager(mViewPager);
     }
 
     private void refView(View view) {
-        mViewPager = view.findViewById(R.id.materialViewPager);
+
+        mViewPager = view.findViewById(R.id.viewpager);
+        viewPagerTab = (SmartTabLayout) view.findViewById(R.id.viewpagertab);
+
     }
 
     public static class PageAdapter extends FragmentStatePagerAdapter{
