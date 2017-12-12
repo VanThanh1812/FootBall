@@ -15,23 +15,18 @@ import com.codedao.footballapp.ui.news.presenter.NewsPresenter;
 
 import java.util.List;
 
-/**
- * Created by vanthanh on 12/11/17.
- */
-
-public class NewsCountryFragment extends Fragment implements NewsViewImpl{
+public class NewsInternationFragment extends Fragment implements NewsViewImpl{
     private Context context;
     private NewsPresenter presenter;
 
-    private static NewsCountryFragment instance = null;
-
-    public NewsCountryFragment(){
-
+    public NewsInternationFragment() {
     }
 
-    public static NewsCountryFragment getInstance(){
+    private static NewsInternationFragment instance = null;
+
+    public static NewsInternationFragment getInstance(){
         if (instance == null){
-            instance = new NewsCountryFragment();
+            instance = new NewsInternationFragment();
         }
         return instance;
     }
@@ -40,11 +35,9 @@ public class NewsCountryFragment extends Fragment implements NewsViewImpl{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.layout_newscountry, container, false);
-
+        View view = inflater.inflate(R.layout.layout_newsinternation, container, false);
         presenter = new NewsPresenter(this, getContext());
-        presenter.loadFirebase("country", 0);
-
+        presenter.loadFirebase("international", 1);
         return view;
     }
 
