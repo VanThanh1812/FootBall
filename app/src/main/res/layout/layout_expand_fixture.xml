@@ -87,7 +87,7 @@
                 <ImageView
                     android:id="@+id/iv_expand"
                     android:layout_weight="0.5"
-                    android:src="@drawable/ic_arrow_right"
+                    app:srcCompat="@drawable/ic_arrow_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

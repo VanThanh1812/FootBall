@@ -39,7 +39,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> {
 
     @Override
     public MatchVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_expand_fixture, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_expand_fixture, parent, false);
         return new MatchVH(view);
     }
 
