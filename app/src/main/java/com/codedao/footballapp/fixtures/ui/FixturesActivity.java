@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.codedao.footballapp.R;
 import com.codedao.footballapp.fixtures.fragment.MatchFragment;
@@ -68,9 +69,27 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
         for (int i=0; i< list.size(); i++){
             list1.add(MatchFragment.newInstance(list.get(i).getId(), list.get(i).getCurrentMatchday()));
         }
-        PagerCompetition pagerCompetition = new PagerCompetition(getSupportFragmentManager(), this, list, list1);
+        getSupportActionBar().setTitle("Vòng "+ list.get(0).getCurrentMatchday()+ " - " + list.get(0).getCaption());
+        final PagerCompetition pagerCompetition = new PagerCompetition(getSupportFragmentManager(), this, list, list1);
         competitionViewpager.setAdapter(pagerCompetition);
         smartTabLayout.setViewPager(competitionViewpager);
+
+        competitionViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                getSupportActionBar().setTitle("Vòng "+ pagerCompetition.list.get(position).getCurrentMatchday()+ " - " + pagerCompetition.list.get(position).getCaption());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -89,6 +108,14 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
             this.context = context;
             this.list = list;
             this.listFragment = listFragment;
+        }
+
+        public List<Competition> getList() {
+            return list;
+        }
+
+        public List<Fragment> getListFragment() {
+            return listFragment;
         }
 
         @Override

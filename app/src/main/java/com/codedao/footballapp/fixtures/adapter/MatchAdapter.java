@@ -2,6 +2,7 @@ package com.codedao.footballapp.fixtures.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codedao.footballapp.R;
 import com.codedao.footballapp.fixtures.fragment.MatchActionImpl;
 import com.codedao.footballapp.fixtures.models.entity.match.Match;
+import com.codedao.footballapp.fixtures.models.entity.match.Result;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.util.ArrayList;
@@ -40,11 +44,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> {
     }
 
     @Override
-    public void onBindViewHolder(MatchVH holder, int position) {
+    public void onBindViewHolder(final MatchVH holder, int position) {
         Match match = list.get(position);
         holder.tv_time.setText(match.getDate());
         holder.tv_hometeam.setText(match.getHomeTeamName());
         holder.tv_awayteam.setText(match.getAwayTeamName());
+        Log.d("result23", match.getIv_awayteam());
+        Glide.with(context).load(match.getIv_hometeam()).apply(new RequestOptions().placeholder(R.drawable.icon_ball).error(R.drawable.icon_ball)).into(holder.iv_hometeam);
+        Glide.with(context).load(match.getIv_awayteam()).apply(new RequestOptions().placeholder(R.drawable.icon_ball).error(R.drawable.icon_ball)).into(holder.iv_away_team);
         holder.expandableRelativeLayout.collapse();
         holder.btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +65,26 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> {
                 listenAction.onClickComment();
             }
         });
+        holder.iv_expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.expandableRelativeLayout.isExpanded()){
+                    holder.expandableRelativeLayout.collapse();
+                    holder.iv_expand.setImageResource(R.drawable.ic_arrow_right);
+                }else{
+                    holder.expandableRelativeLayout.expand();
+                    holder.iv_expand.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
+                }
+            }
+        });
+
+        Result result = match.getResult();
+        if (result.getGoalsAwayTeam() == -1){
+            return;
+        }else{
+            String resulttext = result.getGoalsHomeTeam()+" - "+result.getGoalsAwayTeam();
+            holder.tv_result.setText(resulttext);
+        }
     }
 
     @Override

@@ -22,6 +22,22 @@ public class Match {
         this.result = new Result();
     }
 
+    public String getIv_awayteam() {
+        return iv_awayteam;
+    }
+
+    public void setIv_awayteam(String iv_awayteam) {
+        this.iv_awayteam = iv_awayteam;
+    }
+
+    public String getIv_hometeam() {
+        return iv_hometeam;
+    }
+
+    public void setIv_hometeam(String iv_hometeam) {
+        this.iv_hometeam = iv_hometeam;
+    }
+
     public String getAwayTeamName() {
         return awayTeamName;
     }

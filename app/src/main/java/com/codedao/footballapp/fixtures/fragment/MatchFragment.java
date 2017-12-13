@@ -15,6 +15,7 @@ import com.codedao.footballapp.R;
 import com.codedao.footballapp.fixtures.adapter.MatchAdapter;
 import com.codedao.footballapp.fixtures.models.entity.match.Match;
 import com.codedao.footballapp.fixtures.presenter.MatchPresenter;
+import com.codedao.footballapp.fixtures.presenter.TeamPresenter;
 
 import java.util.List;
 
@@ -22,12 +23,15 @@ import java.util.List;
  * Created by vanthanhbk on 12/12/2017.
  */
 
-public class MatchFragment extends Fragment implements MatchViewImpl, MatchActionImpl{
+public class MatchFragment extends Fragment implements MatchViewImpl, MatchActionImpl, TeamImpl {
 
     private Context context;
     private int idCompetition;
     private int matchDay;
+
     private MatchPresenter presenter;
+    private TeamPresenter teamPresenter;
+
     private RecyclerView recyclerView;
     private MatchAdapter adapter;
 
@@ -53,8 +57,12 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
 
         idCompetition = getArguments().getInt("idC");
         matchDay = getArguments().getInt("match");
+
         presenter = new MatchPresenter(getContext(), this);
-        presenter.loadMatchToday(idCompetition, matchDay);
+        teamPresenter = new TeamPresenter(this);
+
+        teamPresenter.loadTeam(idCompetition);
+
         refView(view);
 
         return view;
@@ -78,6 +86,16 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
     @Override
     public void onLoadMatchDone(List<Match> matchList) {
         show(matchList);
+    }
+
+    @Override
+    public void onLoadTeam() {
+        presenter.loadMatchToday(idCompetition, matchDay);
+    }
+
+    @Override
+    public void onLoadTeamFail(String gail) {
+        showSnackbar(gail);
     }
 
     @Override

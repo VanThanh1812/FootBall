@@ -2,79 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
+    android:padding="5dp"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
-            android:padding="2dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_match_time"
-                android:text="1223 \n 2323"
+                android:text=""
                 android:layout_gravity="center"
                 android:padding="2dp"
-                android:layout_weight="1"
                 android:textColor="@android:color/black"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/iv_hometeam"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_hometeam"
-                    android:text="Burnley FC"
-                    android:textColor="@android:color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tv_result"
-                android:layout_weight="1"
-                android:text=" ? - ? "
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/colorAccent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/iv_awayteam"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_awayteam"
-                    android:text="Burnley FC"
-                    android:textColor="@android:color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/iv_expand"
-                android:layout_weight="0.5"
-                android:src="@drawable/ic_arrow_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:padding="2dp"
+                android:gravity="center|top"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:padding="2dp"
+                    android:layout_weight="0.5"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_hometeam"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="64dp"/>
+                    <TextView
+                        android:id="@+id/tv_hometeam"
+                        android:text="Burnladadadadadadadaey FC"
+                        android:gravity="center|top"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_result"
+                    android:layout_weight="1"
+                    android:text=" ? - ? "
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:gravity="center|top"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_awayteam"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="64dp"/>
+                    <TextView
+                        android:id="@+id/tv_awayteam"
+                        android:text="Burnley FC"
+                        android:gravity="center"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_expand"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_arrow_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -153,4 +169,8 @@
         </LinearLayout>
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+    <View
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
 </LinearLayout>
