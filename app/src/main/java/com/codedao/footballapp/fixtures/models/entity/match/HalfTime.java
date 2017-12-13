@@ -5,8 +5,13 @@ package com.codedao.footballapp.fixtures.models.entity.match;
  */
 
 public class HalfTime {
-    private Integer goalsAwayTeam;
-    private Integer goalsHomeTeam;
+    private int goalsAwayTeam;
+    private int goalsHomeTeam;
+
+    public HalfTime() {
+        this.goalsAwayTeam = -1;
+        this.goalsHomeTeam = -1;
+    }
 
     public Integer getGoalsAwayTeam() {
         return goalsAwayTeam;

@@ -3,6 +3,7 @@ package com.codedao.footballapp.fixtures.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by vanthanhbk on 12/12/2017.
  */
 
-public class MatchFragment extends Fragment implements MatchViewImpl{
+public class MatchFragment extends Fragment implements MatchViewImpl, MatchActionImpl{
 
     private Context context;
     private int idCompetition;
@@ -60,7 +61,7 @@ public class MatchFragment extends Fragment implements MatchViewImpl{
     }
 
     private void show(List<Match> matchList) {
-        adapter = new MatchAdapter(getContext(), matchList);
+        adapter = new MatchAdapter(getContext(), matchList, this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -81,6 +82,20 @@ public class MatchFragment extends Fragment implements MatchViewImpl{
 
     @Override
     public void onLoadFail(String fail) {
+        showSnackbar(fail);
+    }
 
+    @Override
+    public void onClickSendButton() {
+        showSnackbar("Đã gửi kết quả dự đoán");
+    }
+
+    @Override
+    public void onClickComment() {
+        showSnackbar("Open comment");
+    }
+
+    public void showSnackbar(String string){
+        Snackbar.make(getView(), string, Snackbar.LENGTH_SHORT).show();
     }
 }

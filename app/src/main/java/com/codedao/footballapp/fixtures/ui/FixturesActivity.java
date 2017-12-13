@@ -31,6 +31,7 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
         setContentView(R.layout.activity_fixtures);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Lịch thi đấu");
 
         refView();

@@ -10,6 +10,12 @@ public class Result {
     private Integer goalsHomeTeam;
     private HalfTime halfTime;
 
+    public Result() {
+        this.goalsAwayTeam = -1;
+        this.goalsHomeTeam = -1;
+        this.halfTime = new HalfTime();
+    }
+
     public Integer getGoalsAwayTeam() {
         return goalsAwayTeam;
     }

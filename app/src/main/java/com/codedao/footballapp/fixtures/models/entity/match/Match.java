@@ -9,9 +9,18 @@ public class Match {
     private String awayTeamName;
     private String date;
     private String homeTeamName;
-    private Integer matchday;
+    private int matchday;
     private Result result;
     private String status;
+
+    // custom
+
+    private String iv_awayteam;
+    private String iv_hometeam;
+
+    public Match() {
+        this.result = new Result();
+    }
 
     public String getAwayTeamName() {
         return awayTeamName;
