@@ -47,6 +47,8 @@ public class MatchPresenter implements MatchImpl{
                             Log.d("dbmatch", snapshot.getValue().toString());
                             Match m = snapshot.getValue(Match.class);
                             //check image
+                            m.setId(Integer.parseInt(snapshot.getKey()));
+                            m.setIdCompetition(idCompe);
 
                             String iv_home = SharedPrefs.getInstance().get(m.getHomeTeamName(), String.class);
                             String iv_away = SharedPrefs.getInstance().get(m.getAwayTeamName(), String.class);
@@ -69,33 +71,29 @@ public class MatchPresenter implements MatchImpl{
                 });
     }
 
-    private void loadImageTeam(final int idCompe, final Match m) {
+    /*
+    * divine: 0-home  /  1-away
+    * */
+    public void sendDivine(String uid, int idCompe, int idMatch, int divine){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final DatabaseReference db2 = db.getReference()
+        db.getReference()
                 .child("data")
-                .child("teams")
-                .child(String.valueOf(idCompe))
-                .child("teams");
-       db2
-                .orderByChild("crestUrl")
-                .addValueEventListener(new ValueEventListener() {
+                .child("divine")
+                .child(uid)
+              .child(idCompe+"_"+idMatch)
+                .setValue(divine, new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot snap : dataSnapshot.getChildren()){
-                            Log.d("cresas", snap.child("crestUrl").getValue().toString());
-                            SharedPrefs.getInstance().put(m.getHomeTeamName(), snap.child("crestUrl").getValue().toString());
-                            m.setIv_hometeam(snap.child("crestUrl").getValue().toString());
-
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        String message;
+                        if (databaseError != null){
+                            message = "Gửi dự đoán lỗi, hãy thử lại";
+                        }else{
+                            message = "Gửi dự đoán thành công";
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
+                        matchView.onLoadFail(message);
                     }
                 });
     }
-
     //toto: load image
 
     @Override

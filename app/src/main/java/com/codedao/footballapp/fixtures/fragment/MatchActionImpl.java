@@ -5,6 +5,8 @@ package com.codedao.footballapp.fixtures.fragment;
  */
 
 public interface MatchActionImpl {
-    void onClickSendButton();
+    void onClickSendButton( int idC, int match, int divine);
     void onClickComment();
+    void onNeedLogin();
+    void onMatchFail();
 }

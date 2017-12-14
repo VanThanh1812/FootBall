@@ -5,7 +5,8 @@ package com.codedao.footballapp.fixtures.models.entity.match;
  */
 
 public class Match {
-
+    private int id;
+    private int idCompetition;
     private String awayTeamName;
     private String date;
     private String homeTeamName;
@@ -17,6 +18,22 @@ public class Match {
 
     private String iv_awayteam;
     private String iv_hometeam;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdCompetition() {
+        return idCompetition;
+    }
+
+    public void setIdCompetition(int idCompetition) {
+        this.idCompetition = idCompetition;
+    }
 
     public Match() {
         this.result = new Result();
@@ -86,4 +103,19 @@ public class Match {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Match{" +
+                "awayTeamName='" + awayTeamName + '\'' +
+                ", id=" + id +
+                ", idCompetition=" + idCompetition +
+                ", date='" + date + '\'' +
+                ", homeTeamName='" + homeTeamName + '\'' +
+                ", matchday=" + matchday +
+                ", result=" + result +
+                ", status='" + status + '\'' +
+                ", iv_awayteam='" + iv_awayteam + '\'' +
+                ", iv_hometeam='" + iv_hometeam + '\'' +
+                '}';
+    }
 }

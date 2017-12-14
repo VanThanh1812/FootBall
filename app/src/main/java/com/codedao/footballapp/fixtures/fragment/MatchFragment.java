@@ -1,6 +1,7 @@
 package com.codedao.footballapp.fixtures.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codedao.footballapp.R;
+import com.codedao.footballapp.auth.LoginActivity;
 import com.codedao.footballapp.fixtures.adapter.MatchAdapter;
 import com.codedao.footballapp.fixtures.models.entity.match.Match;
 import com.codedao.footballapp.fixtures.presenter.MatchPresenter;
 import com.codedao.footballapp.fixtures.presenter.TeamPresenter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -104,8 +108,14 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
     }
 
     @Override
-    public void onClickSendButton() {
-        showSnackbar("Đã gửi kết quả dự đoán");
+    public void onClickSendButton(int idC, int idMatch, int divine) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            presenter.sendDivine(user.getUid(), idC, idMatch, divine);
+        }else{
+            showSnackbar("You need login app.");
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }
     }
 
     @Override
@@ -113,7 +123,22 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
         showSnackbar("Open comment");
     }
 
+    @Override
+    public void onNeedLogin() {
+        startActivity(new Intent(getContext(), LoginActivity.class));
+    }
+
+    @Override
+    public void onMatchFail() {
+        showSnackbar("Fail to load data.");
+    }
+
     public void showSnackbar(String string){
-        Snackbar.make(getView(), string, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getView(), string, Snackbar.LENGTH_SHORT).setAction("Oke", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        }).show();
     }
 }

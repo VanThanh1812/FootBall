@@ -88,25 +88,33 @@
                     android:id="@+id/iv_expand"
                     android:layout_weight="0.5"
                     app:srcCompat="@drawable/ic_arrow_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_margin="3dp"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/expand_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ael_duration="400"
+        app:ael_duration="300"
         android:paddingTop="10dp"
-        app:ael_expanded="true"
+        app:ael_expanded="false"
         app:ael_interpolator="bounce"
         app:ael_orientation="vertical">
 
         <LinearLayout
             android:orientation="vertical"
-            android:gravity="center"
+            android:gravity="center|top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -115,14 +123,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <RadioGroup
+                android:id="@+id/rd_divine"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="60dp">
                 <View
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <RadioButton
+                    android:id="@+id/rd_home"
                     android:text="Đội chủ nhà"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -132,6 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <RadioButton
+                    android:id="@+id/rd_away"
                     android:text="Đội khách"
                     android:layout_weight="2"
                     android:layout_width="0dp"
@@ -139,6 +150,15 @@
                 <View
                     android:layout_weight="1"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/rd_equal"
+                    android:text="Hai đội hòa"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_width="5dp"
                     android:layout_height="wrap_content"/>
 
             </RadioGroup>
@@ -169,6 +189,73 @@
         </LinearLayout>
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+    <!--expand_layout_divine-->
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expand_layout_divine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ael_duration="300"
+        android:paddingTop="10dp"
+        app:ael_expanded="false"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:text="Kết quả dự đoán"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iv_result"
+                android:textColor="@android:color/black"
+                android:drawablePadding="5dp"
+                android:src="@mipmap/ic_checkoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_comment2"
+                android:text="Xem bình luận"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/psts_background_tab_pressed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expand_not_divine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ael_duration="300"
+        android:paddingTop="10dp"
+        app:ael_expanded="false"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:text="Bạn không có dự đoán nào"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_comment3"
+                android:text="Xem bình luận"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/psts_background_tab_pressed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
     <View
         android:background="@android:color/black"
         android:layout_width="match_parent"

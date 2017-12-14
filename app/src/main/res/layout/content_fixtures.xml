@@ -12,7 +12,6 @@
     tools:context=".fixtures.ui.FixturesActivity"
     tools:showIn="@layout/activity_fixtures">
 
-
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/tabCompetition"
         android:layout_width="wrap_content"
