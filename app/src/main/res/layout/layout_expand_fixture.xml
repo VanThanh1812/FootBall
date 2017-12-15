@@ -126,15 +126,13 @@
                 android:id="@+id/rd_divine"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
+                android:layout_height="50dp">
+
                 <RadioButton
                     android:id="@+id/rd_home"
                     android:text="Đội chủ nhà"
                     android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <View
@@ -162,6 +160,48 @@
                     android:layout_height="wrap_content"/>
 
             </RadioGroup>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/tv_home"
+                    android:text="Đội chủ nhà"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorGreen"
+                    android:layout_weight="2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_away"
+                    android:text="Đội khách"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorGreen"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_equal"
+                    android:text="Hai đội hòa"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorGreen"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:gravity="center"

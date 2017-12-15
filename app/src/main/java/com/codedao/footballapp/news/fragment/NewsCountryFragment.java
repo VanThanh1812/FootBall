@@ -86,7 +86,9 @@ public class NewsCountryFragment extends Fragment implements NewsViewImpl, Swipe
     @Override
     public void onLoadFail(String fail) {
         Log.d("sizeli", fail);
-        refreshLayout.setRefreshing(false);
+        if (refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

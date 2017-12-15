@@ -1,5 +1,6 @@
 package com.codedao.footballapp.fixtures.presenter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 
 import com.codedao.footballapp.fixtures.models.MatchInterator;
@@ -9,7 +10,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CompetitionPresenter  {
@@ -42,7 +46,9 @@ public class CompetitionPresenter  {
         });
     }
 
-    public void loadMatchByCompetition(){
+    public void openPicker(){
+        AlertDialog.Builder aBuider = new AlertDialog.Builder(context);
+        aBuider.setTitle("Chọn ngày");
 
     }
 

@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -16,15 +19,19 @@ import com.codedao.footballapp.fixtures.fragment.MatchFragment;
 import com.codedao.footballapp.fixtures.models.entity.Competition;
 import com.codedao.footballapp.fixtures.presenter.CompetitionPresenter;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class FixturesActivity extends AppCompatActivity implements FixturesViewImpl {
+public class FixturesActivity extends AppCompatActivity implements FixturesViewImpl, DatePickerDialog.OnDateSetListener {
 
     private CompetitionPresenter competitionPresenter;
     private ViewPager competitionViewpager;
     private SmartTabLayout smartTabLayout;
+    private PagerCompetition pagerCompetition;
+    private ArrayList<Fragment> listFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +57,33 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_fixtures, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home){
             finish();
         }
+        if (item.getItemId() == R.id.select_day){
+            openSelectDay();
+        }
         return true;
+    }
+
+    private void openSelectDay() {
+        Calendar now = Calendar.getInstance();
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.show(getFragmentManager(), "Chọn ngày");
+
     }
 
     @Override
@@ -65,12 +94,13 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
 
     @Override
     public void onLoadCompetitionSuccess(List<Competition> list) {
-        List<Fragment> list1 = new ArrayList<>();
+        listFragment = new ArrayList<>();
         for (int i=0; i< list.size(); i++){
-            list1.add(MatchFragment.newInstance(list.get(i).getId(), list.get(i).getCurrentMatchday()));
+            listFragment.add(MatchFragment.newInstance(list.get(i).getId(), list.get(i).getCurrentMatchday()));
         }
         getSupportActionBar().setTitle("Vòng "+ list.get(0).getCurrentMatchday()+ " - " + list.get(0).getCaption());
-        final PagerCompetition pagerCompetition = new PagerCompetition(getSupportFragmentManager(), this, list, list1);
+
+        pagerCompetition = new PagerCompetition(getSupportFragmentManager(), this, list, listFragment);
         competitionViewpager.setAdapter(pagerCompetition);
         smartTabLayout.setViewPager(competitionViewpager);
 
@@ -95,6 +125,16 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
     @Override
     public void onLoadCompetitionFail(String fail) {
 
+    }
+//2017-12-16
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        int curent = competitionViewpager.getCurrentItem();
+        int month = monthOfYear+1;
+        String day = year+"-"+month+"-"+dayOfMonth;
+        Log.d("current_select: ", day);
+        MatchFragment fragment = (MatchFragment) listFragment.get(curent);
+        fragment.setDay(day);
     }
 
     public static class PagerCompetition extends FragmentStatePagerAdapter{

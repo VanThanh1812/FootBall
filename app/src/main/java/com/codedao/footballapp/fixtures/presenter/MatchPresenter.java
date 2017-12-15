@@ -71,6 +71,57 @@ public class MatchPresenter implements MatchImpl{
                 });
     }
 
+    public void loadMatchByDay(final int idCompe, final String day){
+
+        final List<Match> list = new ArrayList<Match>();
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference()
+                .child("data")
+                .child("fixtures")
+                .child(String.valueOf(idCompe))
+                .child("fixtures")
+                .orderByChild("date")
+                .startAt(day+"T00:00:00Z")
+                .endAt(day+"T23:59:59Z")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() == null){
+                            matchView.onLoadFail("Không có trận đấu nào trong ngày.");
+                            return;
+                        }//2017-12-16
+
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            Log.d("dbmatch", snapshot.getValue().toString());
+                            Match m = snapshot.getValue(Match.class);
+                            //check image
+                            m.setId(Integer.parseInt(snapshot.getKey()));
+                            m.setIdCompetition(idCompe);
+
+                            String iv_home = SharedPrefs.getInstance().get(m.getHomeTeamName(), String.class);
+                            String iv_away = SharedPrefs.getInstance().get(m.getAwayTeamName(), String.class);
+
+                            m.setIv_awayteam(iv_away);
+                            m.setIv_hometeam(iv_home);
+
+                            //load image
+                            if (m.getDate().indexOf(day) == 0){
+                                list.add(m);
+                            }
+
+                        }
+                        matchView.onLoadMatchDone(list);
+                        matchView.onLoadFail("Có "+list.size()+" trận đấu.");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        matchView.onLoadFail(databaseError.getMessage());
+                    }
+                });
+
+    }
+
     /*
     * divine: 0-home  /  1-away
     * */

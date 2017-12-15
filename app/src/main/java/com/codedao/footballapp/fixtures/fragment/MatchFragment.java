@@ -38,6 +38,7 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
 
     private RecyclerView recyclerView;
     private MatchAdapter adapter;
+    private String daySelct;
 
     public MatchFragment() {
 
@@ -50,6 +51,11 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
         bundle.putInt("match", matchday);
         matchFragment.setArguments(bundle);
         return matchFragment;
+    }
+
+    public void setDay(String daySelect){
+        this.daySelct = daySelect;
+        presenter.loadMatchByDay(idCompetition, daySelect);
     }
 
 

@@ -25,10 +25,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -122,6 +124,11 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> imp
             holder.tv_result.setText(resulttext);
         }
 
+        // count
+        countDivine(match, 0, holder.tvs_home);
+        countDivine(match, 1, holder.tvs_away);
+        countDivine(match, 2, holder.tvs_equal);
+
         // check divine
         holder.iv_expand.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,11 +217,35 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> imp
 
     }
 
+    private void countDivine(final Match match, int value, final TextView tv){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        db.child("data")
+                .child("divine")
+                .orderByChild(match.getIdCompetition()+"_"+match.getId())
+                .equalTo(value)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d("addd"+match.getIdCompetition()+"_"+match.getId(), dataSnapshot.toString());
+                        int sum=0;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren() ){
+                            sum++;
+                        }
+                        tv.setText(sum+" người chọn");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
 
     public void gotoLogin(){
         AlertDialog.Builder aBuilder = new AlertDialog.Builder(context);
         aBuilder.setTitle("Đăng nhập");
-        aBuilder.setMessage("Đăng nhập ngay để xem kết quả");
+        aBuilder.setMessage("Đăng nhập ngay để xem kết quả dự đoán");
         aBuilder.setPositiveButton("Đăng nhập ngay", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -236,7 +267,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> imp
 
     public static class MatchVH extends RecyclerView.ViewHolder {
 
-        TextView tv_time, tv_hometeam, tv_awayteam, tv_result;
+        TextView tv_time, tv_hometeam, tv_awayteam, tv_result, tvs_home, tvs_away, tvs_equal;
         ImageView iv_hometeam, iv_away_team, iv_expand, iv_result;
         ExpandableRelativeLayout expandableRelativeLayout, expand_layout_divine, expand_not_divine;
         Button btn_comment, btn_send, btn_comment2, btn_comment3;
@@ -262,6 +293,9 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> imp
             btn_send = itemView.findViewById(R.id.btn_send);
             rd_divine = itemView.findViewById(R.id.rd_divine);
             progress = itemView.findViewById(R.id.progress);
+            tvs_away = itemView.findViewById(R.id.tv_away);
+            tvs_home = itemView.findViewById(R.id.tv_home);
+            tvs_equal = itemView.findViewById(R.id.tv_equal);
         }
     }
 }
