@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -96,23 +95,26 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> imp
 
             }
         });
+
+        final String title = match.getHomeTeamName()+" - "+match.getAwayTeamName();
+
         holder.btn_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listenAction.onClickComment();
+                listenAction.onClickComment(match.getIdCompetition(), match.getId(), title);
             }
         });
 
         holder.btn_comment2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listenAction.onClickComment();
+                listenAction.onClickComment(match.getIdCompetition(), match.getId(), title);
             }
         });
         holder.btn_comment3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listenAction.onClickComment();
+                listenAction.onClickComment(match.getIdCompetition(), match.getId(), title);
             }
         });
 

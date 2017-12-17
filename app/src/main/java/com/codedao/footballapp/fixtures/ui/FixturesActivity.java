@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codedao.footballapp.R;
 import com.codedao.footballapp.fixtures.fragment.MatchFragment;
@@ -31,7 +31,7 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
     private ViewPager competitionViewpager;
     private SmartTabLayout smartTabLayout;
     private PagerCompetition pagerCompetition;
-    private ArrayList<Fragment> listFragment;
+    private ArrayList<Fragment> listFragment = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +124,7 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
 
     @Override
     public void onLoadCompetitionFail(String fail) {
-
+        Toast.makeText(this, fail, Toast.LENGTH_SHORT).show();
     }
 //2017-12-16
     @Override
@@ -133,6 +133,10 @@ public class FixturesActivity extends AppCompatActivity implements FixturesViewI
         int month = monthOfYear+1;
         String day = year+"-"+month+"-"+dayOfMonth;
         Log.d("current_select: ", day);
+        if (listFragment.size() == 0){
+            onLoadCompetitionFail("Đang load ...");
+            return;
+        }
         MatchFragment fragment = (MatchFragment) listFragment.get(curent);
         fragment.setDay(day);
     }

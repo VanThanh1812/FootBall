@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.codedao.footballapp.R;
 import com.codedao.footballapp.auth.LoginActivity;
+import com.codedao.footballapp.conversation.ui.ConversationActivity;
 import com.codedao.footballapp.fixtures.adapter.MatchAdapter;
 import com.codedao.footballapp.fixtures.models.entity.match.Match;
 import com.codedao.footballapp.fixtures.presenter.MatchPresenter;
@@ -125,8 +126,18 @@ public class MatchFragment extends Fragment implements MatchViewImpl, MatchActio
     }
 
     @Override
-    public void onClickComment() {
-        showSnackbar("Open comment");
+    public void onClickComment(int idCom, int idMatch, String title) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null){
+            showSnackbar("You need login app.");
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }else{
+            Intent intent = new Intent(getContext(), ConversationActivity.class);
+            intent.putExtra("idC", idCom);
+            intent.putExtra("idMatch", idMatch);
+            intent.putExtra("title", title);
+            startActivity(intent);
+        }
     }
 
     @Override
