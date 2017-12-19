@@ -3,6 +3,7 @@ package com.codedao.footballapp.conversation.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.codedao.footballapp.R;
@@ -46,4 +47,11 @@ public class ConversationActivity extends AppCompatActivity {
     private void addListComment() {
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return true;
+    }
 }

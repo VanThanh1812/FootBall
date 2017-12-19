@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 12/12/2017.
+ * Created by Ha Nguyen on 12/12/2017.
  */
 
 public class MatchPresenter implements MatchImpl{

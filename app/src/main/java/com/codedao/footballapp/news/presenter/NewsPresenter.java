@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 11/12/2017.
+ * Created by Ha Nguyen on 11/12/2017.
  */
 
 public class NewsPresenter implements LoadNewsImpl {

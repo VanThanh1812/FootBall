@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by vanthanhbk on 12/12/2017.
+ * Created by Ha Nguyen on 12/12/2017.
  */
 
 public class AwayTeam {

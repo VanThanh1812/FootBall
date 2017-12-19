@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class CommentPresenter {

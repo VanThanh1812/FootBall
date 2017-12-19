@@ -12,9 +12,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by marco on 6/17/16.
- */
 public class Parser extends AsyncTask<String, Void, String> implements Observer {
 
     XMLParser xmlParser;

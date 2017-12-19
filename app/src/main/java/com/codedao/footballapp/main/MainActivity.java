@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codedao.footballapp.R;
+import com.codedao.footballapp.auth.InfomationActivity;
 import com.codedao.footballapp.auth.LoginActivity;
 import com.codedao.footballapp.fixtures.ui.FixturesActivity;
 import com.codedao.footballapp.news.fragment.NewsFragment;
@@ -115,16 +116,15 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
             startActivity(new Intent(this, FixturesActivity.class));
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            FirebaseAuth.getInstance().signOut();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null){
+                startActivity(new Intent(this, LoginActivity.class));
+            }else{
+                startActivity(new Intent(this, InfomationActivity.class));
+            }
 
-            startActivity(new Intent(this, LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

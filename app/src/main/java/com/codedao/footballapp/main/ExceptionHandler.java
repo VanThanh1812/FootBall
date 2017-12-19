@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Created by datdk on 29/06/2016.
+ * Created by Ha Nguyen on 29/06/2016.
  */
 public class ExceptionHandler implements
         Thread.UncaughtExceptionHandler {

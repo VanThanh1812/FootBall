@@ -1,9 +1,5 @@
 package com.codedao.footballapp.rssparser;
 
-/**
- * Created by vanthanh on 12/12/17.
- */
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.xmlpull.v1.XmlPullParser;
@@ -11,12 +7,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
 
-/**
- * Created by Marco Gomiero on 12/02/2015.
- */
 public class XMLParser extends Observable {
 
     private ArrayList<Article> articles;

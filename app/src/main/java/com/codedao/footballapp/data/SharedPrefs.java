@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.codedao.App;
 
 /**
- * Created by vanthanh on 12/13/17.
+ * Created by Ha Nguyen on 12/13/17.
  */
 
 public class SharedPrefs {

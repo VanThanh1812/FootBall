@@ -3,7 +3,7 @@ package com.codedao;
 import android.app.Application;
 
 /**
- * Created by vanthanh on 12/13/17.
+ * Created by Ha Nguyen on 12/13/17.
  */
 
 public class App extends Application {

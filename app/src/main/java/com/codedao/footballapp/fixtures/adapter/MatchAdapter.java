@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 13/12/2017.
+ * Created by Ha Nguyen on 13/12/2017.
  */
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchVH> implements View.OnClickListener {

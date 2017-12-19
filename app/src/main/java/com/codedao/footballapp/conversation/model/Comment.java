@@ -1,7 +1,7 @@
 package com.codedao.footballapp.conversation.model;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class Comment {
@@ -9,9 +9,28 @@ public class Comment {
     private String id;
     private String content;
     private String idMatch;
+    private String username = "";
+    private String avatar = "";
 
     public Comment() {
+        username = "";
+        avatar = "";
+    }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getIdMatch() {

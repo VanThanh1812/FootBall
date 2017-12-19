@@ -5,7 +5,7 @@ import com.codedao.footballapp.news.models.entity.News;
 import java.util.List;
 
 /**
- * Created by vanthanh on 12/11/17.
+ * Created by Ha Nguyen on 12/11/17.
  */
 
 public interface LoadNewsImpl {

@@ -8,10 +8,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.codedao.footballapp.R;
+import com.codedao.footballapp.data.SharedPrefs;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -23,11 +27,14 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "loginfb";
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
+    private Object infoUser;
 
     @Override
     public void onStart() {
@@ -56,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                getInfoUser();
             }
 
             @Override
@@ -114,4 +122,43 @@ public class LoginActivity extends AppCompatActivity {
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void getInfoUser() {
+        Bundle params = new Bundle();
+        params.putString("fields", "id,name,email,gender,cover,picture.type(large)");
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        if (response != null) {
+                            try {
+                                String profilePicUrl = "";
+                                String name = "";
+                                String email="";
+                                String cover="";
+                                JSONObject data = response.getJSONObject();
+                                if (data.has("picture")) {
+                                    profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                }
+                                Log.d("responsefb", response.toString());
+                                if (data.has("name")){
+                                    name = data.get("name").toString();
+                                }
+                                if (data.has("email")){
+                                    email = data.get("email").toString();
+                                }
+                                if (data.has("cover")){
+                                    cover = data.getJSONObject("cover").getString("source");
+                                }
+                                Log.d("responsefb", email+"\n"+cover);
+                                SharedPrefs.getInstance().put(User.URL_AVA, profilePicUrl);
+                                SharedPrefs.getInstance().put(User.USERNAME, name);
+                                SharedPrefs.getInstance().put(User.COVER, cover);
+                                SharedPrefs.getInstance().put(User.EMAIL, email);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).executeAsync();
+    }
 }

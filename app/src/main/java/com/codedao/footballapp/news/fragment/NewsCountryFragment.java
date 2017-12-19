@@ -23,7 +23,7 @@ import com.codedao.footballapp.news.webview.NewsActivity;
 import java.util.List;
 
 /**
- * Created by vanthanh on 12/11/17.
+ * Created by Ha Nguyen on 12/11/17.
  */
 
 public class NewsCountryFragment extends Fragment implements NewsViewImpl, SwipeRefreshLayout.OnRefreshListener, IOnClickNews {

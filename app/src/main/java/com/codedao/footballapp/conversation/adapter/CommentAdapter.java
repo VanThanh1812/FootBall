@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.codedao.footballapp.R;
 import com.codedao.footballapp.conversation.model.Comment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -58,12 +59,16 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Log.d("bindData", comments.get(position).getContent());
-        Comment comment = comments.get(position);
+        Comment comment = new Comment();
+        comment = comments.get(position);
         int type = getItemViewType(position);
         if (type == 0){
             ((MeVH) holder).tv_me.setText(comment.getContent());
+            Glide.with(context).load(comment.getAvatar()).into(((MeVH)holder).iv_me);
         }else{
+            ((CommentVH) holder).tv_name.setText(comment.getUsername());
             ((CommentVH) holder).tv_commment.setText(comment.getContent());
+            Glide.with(context).load(comment.getAvatar()).into(((CommentVH)holder).circleImageView);
         }
     }
 

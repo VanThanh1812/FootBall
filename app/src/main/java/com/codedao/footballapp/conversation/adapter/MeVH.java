@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.codedao.footballapp.R;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class MeVH extends RecyclerView.ViewHolder {

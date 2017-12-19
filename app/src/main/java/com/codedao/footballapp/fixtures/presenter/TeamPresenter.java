@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by vanthanh on 12/13/17.
+ * Created by Ha Nguyen on 12/13/17.
  */
 
 public class TeamPresenter  {

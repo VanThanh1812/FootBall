@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 12/12/2017.
+ * Created by Ha Nguyen on 12/12/2017.
  */
 
 public class MatchFragment extends Fragment implements MatchViewImpl, MatchActionImpl, TeamImpl {

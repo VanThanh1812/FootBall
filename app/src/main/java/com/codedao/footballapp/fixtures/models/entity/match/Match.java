@@ -1,7 +1,7 @@
 package com.codedao.footballapp.fixtures.models.entity.match;
 
 /**
- * Created by vanthanhbk on 12/12/2017.
+ * Created by Ha Nguyen on 12/12/2017.
  */
 
 public class Match {

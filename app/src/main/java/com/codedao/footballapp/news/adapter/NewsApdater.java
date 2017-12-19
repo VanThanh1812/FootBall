@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanh on 12/12/17.
+ * Created by Ha Nguyen on 12/12/17.
  */
 
 public class NewsApdater extends RecyclerView.Adapter<NewsApdater.NewsVH> {

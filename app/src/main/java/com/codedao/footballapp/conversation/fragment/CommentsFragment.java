@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class CommentsFragment extends Fragment implements FgImpl{
@@ -66,6 +66,9 @@ public class CommentsFragment extends Fragment implements FgImpl{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        if (adapter.getItemCount() > 2){
+            recyclerView.scrollToPosition(adapter.getItemCount()-1);
+        }
     }
 
     @Override

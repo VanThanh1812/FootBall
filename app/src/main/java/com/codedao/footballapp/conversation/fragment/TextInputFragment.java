@@ -11,15 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.codedao.footballapp.R;
+import com.codedao.footballapp.auth.User;
 import com.codedao.footballapp.conversation.model.Comment;
 import com.codedao.footballapp.conversation.presenter.CommentPresenter;
+import com.codedao.footballapp.data.SharedPrefs;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by vanthanhbk on 17/12/2017.
+ * Created by Ha Nguyen on 17/12/2017.
  */
 
 public class TextInputFragment extends Fragment implements FgImpl {
@@ -64,6 +66,8 @@ public class TextInputFragment extends Fragment implements FgImpl {
                 comment.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 comment.setTimeStamp(Calendar.getInstance().getTime().getTime());
                 comment.setIdMatch(title);
+                comment.setUsername(SharedPrefs.getInstance().get(User.USERNAME, String.class));
+                comment.setAvatar(SharedPrefs.getInstance().get(User.URL_AVA, String.class));
 
                 presenter.sendComment(comment);
             }
